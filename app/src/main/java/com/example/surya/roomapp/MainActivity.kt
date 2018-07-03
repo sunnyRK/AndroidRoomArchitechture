@@ -34,13 +34,17 @@ public class MainActivity : AppCompatActivity() {
         ViewModelCalling()
 
         addNote.setOnClickListener {
-            val weather = WeatherData()
-            val Timestampkey:Long = Timestamp(System.currentTimeMillis()).time
-            weather.id = Timestampkey
-            weather.humidity = Timestampkey.toString()
-            Db.weatherDataDao().insert(weather)
-            ViewModelCalling()
-
+            val note: String = noteEd.text.toString()
+            noteEd.setText("")
+            if(note.length>0)
+            {
+                val weather = WeatherData()
+                val Timestampkey:Long = Timestamp(System.currentTimeMillis()).time
+                weather.id = Timestampkey
+                weather.humidity = note
+                Db.weatherDataDao().insert(weather)
+                ViewModelCalling()
+            }
         }
 
         delNote.setOnClickListener {
